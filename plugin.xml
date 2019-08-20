@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="Neux.cordova.AndroidScreenshot" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>AndroidScreenshot</name>
+	<js-module name="AndroidScreenshot" src="www/androidScreenshot.js">
+		<clobbers target="cordova.plugins.androidScreenshot" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="androidScreenshot">
+				<param name="android-package" value="Neux.cordova.AndroidScreenshot.AndroidScreenshot" />
+			</feature>
+		</config-file>
+	    <config-file parent="/manifest" target="AndroidManifest.xml">
+	        <uses-permission android:name="MediaStore.Images.Media.INTERNAL_CONTENT_URI" />
+	        <uses-permission android:name="MediaStore.Images.Media.EXTERNAL_CONTENT_URI" />
+	        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	    </config-file>
+		<source-file src="src/android/androidScreenshot.java" target-dir="src/com/neux/androidScreenshot/androidScreenshot" />
+	</platform>
+</plugin>

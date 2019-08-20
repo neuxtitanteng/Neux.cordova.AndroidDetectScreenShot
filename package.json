@@ -1,0 +1,17 @@
+{
+  "name": "Neux.cordova.AndroidScreenshot",
+  "version": "1.0.0",
+  "description": "",
+  "cordova": {
+    "id": "Neux.cordova.AndroidScreenshot",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "kevinlin",
+  "license": "ISC"
+}
