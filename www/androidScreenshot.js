@@ -16,6 +16,7 @@ androidScreenshot.prototype.startScreenshotDetect = function (successCallback, e
 channel.onCordovaReady.subscribe(function () {
     screenshot.startScreenshotDetect(function (info) {
         setTimeout(function () {
+        	console.log("androidScreenshotDetect");
             cordova.fireDocumentEvent('screenshotDetect');
         }, 500);
         
