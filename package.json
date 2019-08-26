@@ -1,9 +1,9 @@
 {
-  "name": "Neux.cordova.AndroidScreenshot",
+  "name": "com.neux.android-screenshot",
   "version": "1.0.0",
   "description": "",
   "cordova": {
-    "id": "Neux.cordova.AndroidScreenshot",
+    "id": "com.neux.android-screenshot",
     "platforms": [
       "android"
     ]

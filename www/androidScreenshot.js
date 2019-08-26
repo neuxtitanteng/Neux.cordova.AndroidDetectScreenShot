@@ -5,7 +5,6 @@ var exec = require('cordova/exec');
 console.log("androidScreenshot");
 
 var androidScreenshot = function () {
-    
 };
 
 androidScreenshot.prototype.startScreenshotDetect = function (successCallback, errorCallback) {
@@ -16,9 +15,8 @@ androidScreenshot.prototype.startScreenshotDetect = function (successCallback, e
 channel.onCordovaReady.subscribe(function () {
     screenshot.startScreenshotDetect(function (info) {
         setTimeout(function () {
-        	console.log("androidScreenshotDetect");
             cordova.fireDocumentEvent('screenshotDetect');
-        }, 500);
+        }, 300);
         
     },
     function (e) {
