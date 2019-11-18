@@ -8,12 +8,19 @@ var androidScreenshot = function () {
 };
 
 androidScreenshot.prototype.startScreenshotDetect = function (successCallback, errorCallback) {
+    console.warn('<--- androidScreenshotDetectStart --->')
     exec(successCallback, errorCallback, "androidScreenshot", "start", []);
+};
+
+androidScreenshot.prototype.stopScreenshotDetect = function (successCallback, errorCallback) {
+    console.warn('<--- androidScreenshotDetectStop --->')
+    exec(successCallback, errorCallback, "androidScreenshot", "stop", []);
 };
 
 
 channel.onCordovaReady.subscribe(function () {
     screenshot.startScreenshotDetect(function (info) {
+    	console.warn('startScreenshotDetect', info);
         setTimeout(function () {
             cordova.fireDocumentEvent('screenshotDetect');
         }, 300);

@@ -67,8 +67,14 @@ public class androidScreenshot extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("start")) {
+        if (action.equals("start")) { 
             Activity ctx = this.cordova.getActivity();
+            if(mInternalObserver != null) {
+                ctx.getContentResolver().unregisterContentObserver(mInternalObserver);
+            }
+            if(mExternalObserver != null) {
+                ctx.getContentResolver().unregisterContentObserver(mExternalObserver);
+            }
 
             if(!PermissionHelper.hasPermission(this, READ)) {
                 PermissionHelper.requestPermission(this, 0, READ);
@@ -103,7 +109,8 @@ public class androidScreenshot extends CordovaPlugin {
             // this.coolMethod(message, callbackContext);
             return true;
         } else if (action.equals("stop")) {
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "Error");
+            onDestroy();
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, "Stop");
             pluginResult.setKeepCallback(true);
             callbackContext.sendPluginResult(pluginResult);
         }
@@ -114,13 +121,13 @@ public class androidScreenshot extends CordovaPlugin {
     //     super.onCreate(savedInstanceState);
     //     setContentView(R.layout.activity_screenshot);
     // }
-    
-    // protected void onDestroy() {
-    //     super.onDestroy();
+
+    // protected void stopDetect(ctx) {
+    //     // super.onDestroy();
         
     //     // 注销监听
-    //     mInternalObserver.unregisterContentObserver(mInternalObserver);
-    //     mExternalObserver.unregisterContentObserver(mExternalObserver);
+    //     ctx.getContentResolver().unregisterContentObserver(mInternalObserver);
+    //     ctx.getContentResolver().unregisterContentObserver(mExternalObserver);
     // }
     
     private void handleMediaContentChange(Uri contentUri) {
@@ -165,16 +172,28 @@ public class androidScreenshot extends CordovaPlugin {
     }
     
     private void handleMediaRowData(String data, long dateTaken) {
-        if (checkScreenShot(data, dateTaken)) {
-            Log.d("screenshot", data + " " + dateTaken);
-            if (this.callback != null) {
-            PluginResult result = new PluginResult(PluginResult.Status.OK, "screenshot");
-            result.setKeepCallback(true);
-            this.callback.sendPluginResult(result);
-            }
-        } else {
-            Log.d("Not", "Not screenshot event");
-        }
+        // ActivityManager manager = (ActivityManager) mContext.getSystemService(ACTIVITY_SERVICE);
+        // List<ActivityManager.RunningTaskInfo> runningTaskInfos = manager.getRunningTasks(1);
+        // String cmpNameTemp = null;
+        // if(runningTaskInfos != null){
+        //     cmpNameTemp = runningTaskInfos.get(0).topActivity.toString();
+        // }
+        // if(cmpNameTemp == null){
+        //     return false;
+        // }
+        // if (cmpNameTemp.equals(activityName)) {
+            if (checkScreenShot(data, dateTaken)) {
+                Log.d("screenshot", data + " " + dateTaken);
+                if (this.callback != null) {
+                    PluginResult result = new PluginResult(PluginResult.Status.OK, "screenshot" + data.toString());
+                    result.setKeepCallback(true);
+                    this.callback.sendPluginResult(result);
+                    }
+                } else {
+                    Log.d("Not", "Not screenshot event");
+                }
+        // }
+        
     }
     
     
