@@ -119,12 +119,12 @@ public class androidScreenshot extends CordovaPlugin {
         // 添加监听
         ctx.getContentResolver().registerContentObserver(
             MediaStore.Images.Media.INTERNAL_CONTENT_URI,
-            false,
+            true,
             mInternalObserver
         );
         ctx.getContentResolver().registerContentObserver(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            false,
+            true,
             mExternalObserver
         );
     }
