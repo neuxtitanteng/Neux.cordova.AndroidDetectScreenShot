@@ -71,6 +71,7 @@ public class androidScreenshot extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        Log.d("execute!!");
         if (action.equals("start")) { 
             
             this.startDetect();
